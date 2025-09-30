@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+        }
+    </style>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            font-family: Arial;
+        }
+
+        .main {
+            height: 100%;
+            width: 100%;
+        }
+
+        .header {
+            height: 10%;
+            width: 100%;
+            border: 1px solid black;
+            position: fixed;
+        }
+
+        .content {
+            width: 100%;
+            text-align: left;
+            height: 1500px;
+            padding-top: 200px;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+
+        .date {
+            height: 50%;
+            width: 50%;
+            border: 1px solid black;
+            text-align: center;
+            padding: 10px 10px 10px 10px;
+        }
+
+        .version {
+            height: 50%;
+            width: 50%;
+            border: 1px solid black;
+            text-align: center;
+            padding: 10px 10px 10px 10px;
+        }
+
+        .left {
+            float: left;
+            height: 100%;
+            width: 40%;
+            text-align: center;
+        }
+
+        .logo {
+            float: right;
+            padding: 5px 5px 5px 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script type="text/javascript">
+        window.onload = addPageNumbers;
+            
+                      function addPageNumbers() {
+                        var totalPages = Math.ceil(document.body.scrollHeight / 1123);  //842px A4 pageheight for 72dpi, 1123px A4 pageheight for 96dpi, 
+                        for (var i = 1; i <= 11; i++) {
+                          var pageNumberDiv = document.createElement("div");
+                          var pageNumber = document.createTextNode("Page " + i + " of " + 11);
+                          pageNumberDiv.style.position = "absolute";
+                          pageNumberDiv.style.top = "calc((" + i + " * (297mm - 0.5px)) - 40px)"; //297mm A4 pageheight; 0,5px unknown needed necessary correction value; additional wanted 40px margin from bottom(own element height included)
+                          pageNumberDiv.style.height = "16px";
+                          pageNumberDiv.appendChild(pageNumber);
+                          document.body.insertBefore(pageNumberDiv, document.getElementById("content"));
+                          pageNumberDiv.style.left = "calc(100% - (" + pageNumberDiv.offsetWidth + "px + 20px))";
+                        }
+                      }
+    </script>
+    <div class="main">
+        <div class="header">
+            <div class="logo">
+                <h3><img src="data:image/png;base64,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" class="hello" width="200" height="90" >
+                </h3>
+            </div>
+            <div class="left">
+                <div class="date">
+                    <h3>
+                        <script>
+                            document.write(new Date().toLocaleDateString());
+                        </script>
+                    </h3>
+                </div>
+                <div class="version">
+                    <h3>version 1.0</h3>
+                </div>
+            </div>
+        </div>
+        <p style="page-break-after: always"></p>
+        <div class="content">
+            <style>
+                table,
+                th,
+                td {
+                    text-align: center;
+                    border: 1px solid black;
+                }
+            </style>
+            <h2>VERSION HISTORY</h2>
+            <br />
+            <table style="width:100%">
+                <tr>
+                    <th>VERSION</th>
+                    <th>IMPLEMENTED BY</th>
+                    <th>REVISION DATE</th>
+                    <th>REASON</th>
+                </tr>
+                <tr>
+                    <td>1.0</td>
+                    <td>POORNIMA</td>
+                    <td>
+                        <script>
+                            document.write(new Date().toLocaleDateString()); 
+                        </script>
+                    </td>
+                    <td>REPORT</td>
+                </tr>
+            </table>
+            <p style="page-break-after: always"></p>
+            <br /></br /><br /><br /><br /><br /><br /><br />
+            <h2>Table of Contents</h2>
+            <br /><br />
+            <table style="width:100%">
+                <tr>
+                    <th>S.NO</th>
+                    <th>TITLE</th>
+                    <th>PAGE NO</th>
+                </tr>
+                <tr>
+                    <td>01</td>
+                    <td style="text-align:left">Aim</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>02</td>
+                    <td style="text-align:left">Plant Overview</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>03</td>
+                    <td style="text-align:left">Daily Energy / Run Hours Contribution</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>04</td>
+                    <td style="text-align:left">Energy Meter</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>05</td>
+                    <td style="text-align:left">Energy Meter Frame</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>06</td>
+                    <td style="text-align:left">Inverter</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>07</td>
+                    <td style="text-align:left">Inverter Frame</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>08</td>
+                    <td style="text-align:left">Supply Side Management Line Diagram</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>09</td>
+                    <td style="text-align:left">Generation Reports</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td style="text-align:left">Plant Energy Flow</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td style="text-align:left">Plant performance</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td style="text-align:left">GenSet - Solar Logs</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td style="text-align:left">Weather Station</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td style="text-align:left">System View</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td style="text-align:left">Documentation</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td style="text-align:left">DGR_Report</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td style="text-align:left">Monthly/Yearly_Report</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td style="text-align:left">Inverter PAC/IDC Heatmap</td>
+                    <td>11</td>
+                </tr>
+            </table>
+            <p style="page-break-after: always"></p>
+            <br /></br /><br /><br /><br /><br /><br /><br />
+            <h3>01. Aim</h3>
+            <br />
+            <p>This report gives an overview for monthly iPLON portal status update of your plant</p>
+            <br />
+            <h3>02. Plant Overview</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a1}}}"width="650" height="370">
+            </div>
+            <br />
+            <h3>03. Daily Energy / Run Hours Contribution</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a2}}}"width="650" height="370">
+            </div>
+            <br />
+            <p style="page-break-after: always"></p>
+            <br /></br /><br /><br /><br /><br /><br /><br />
+            <h3>04. Energy Meter</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a3}}}"width="650" height="400">
+            </div>
+            <br />
+            <h3>05. Energy Meter Frame</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a4}}}"width="650" height="400">
+            </div>
+            <br />
+            <p style="page-break-after: always"></p>
+            <br /></br /><br /><br /><br /><br /><br /><br />
+            <h3>06. Inverter</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a5}}}"width="650" height="400">
+            </div>
+            <br />
+            <h3>07. Inverter Frame</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a6}}}"width="650" height="400">
+            </div>
+            <br />
+            <p style="page-break-after: always"></p>
+            <br /></br /><br /><br /><br /><br /><br /><br />
+            <h3>08. Supply Side Management Line Diagram</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a7}}}"width="650" height="400">
+            </div>
+            <br />
+            <h3>09. Generation Reports</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a8}}}"width="650" height="400">
+            </div>
+            <br />
+            <p style="page-break-after: always"></p>
+            <br /></br /><br /><br /><br /><br /><br /><br />
+            <h3>10. Plant Energy Flow</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a9}}}"width="650" height="400">
+            </div>
+            <br />
+            <h3>11. Plant performancen</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a10}}}"width="650" height="400">
+            </div>
+            <br />
+            <p style="page-break-after: always"></p>
+            <br /></br /><br /><br /><br /><br /><br /><br />
+            <h3>12. GenSet - Solar Logs</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a11}}}"width="650" height="400">
+            </div>
+            <br />
+            <h3>13. Weather Station</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a12}}}"width="650" height="400">
+            </div>
+            <br />
+            <p style="page-break-after: always"></p>
+            <br /></br /><br /><br /><br /><br /><br /><br />
+            <h3>14. System View</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a13}}}"width="650" height="400">
+            </div>
+            <br />
+            <h3>15. Documentation</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a14}}}"width="650" height="400">
+            </div>
+            <br />
+            <p style="page-break-after: always"></p>
+            <br /></br /><br /><br /><br /><br /><br /><br />
+            <h3>16. DGR_Report</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a15}}}"width="650" height="400">
+            </div>
+            <br />
+            <h3>17. Monthly/Yearly_Report</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a16}}}"width="650" height="400">
+            </div>
+            <br />
+            <p style="page-break-after: always"></p>
+            <br /></br /><br /><br /><br /><br /><br /><br />
+            <h3>18. Inverter PAC/IDC Heatmap</h3>
+            <br />
+            <div style="text-align: center;">
+                <img src="data:image/jpeg;base64,{{{payload.a17}}}"width="650" height="400">
+            </div>
+            <br />
+        </div>
+    </div>
+</body>
+
+</html>
